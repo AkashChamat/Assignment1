@@ -114,16 +114,14 @@ public class MainActivity extends AppCompatActivity {
                     initialN0 = Double.parseDouble(actualInput);
 
                     // Convert symbols to correct operator values
-                    if (operator.equals("+")) {
+                    if (v.getId() == R.id.btn_Add) {
                         operator = "+";
-                    } else if (operator.equals("-")) {
+                    } else if (v.getId() == R.id.btn_Sub) {
                         operator = "-";
-                    } else if (operator.equals("*")) {
-                        operator = "*";
-                    } else if (operator.equals("/")) {
+                    } else if (v.getId() == R.id.btn_Multi) {
+                        operator = "x";
+                    } else if (v.getId() == R.id.btn_Div) {
                         operator = "/";
-                    } else {
-                        operator = btnText;
                     }
 
                     val.setText(actualInput + " " + operator);
@@ -134,7 +132,6 @@ public class MainActivity extends AppCompatActivity {
             }
 //             Equals BUtton
             if (v.getId() == R.id.btn_equal) {
-                Log.e("x", initialN0+""+actualInput );
                 if (!actualInput.isEmpty()) {
                     double SecondNumber = Double.parseDouble(actualInput);
                     double result = 0.0;
@@ -146,7 +143,8 @@ public class MainActivity extends AppCompatActivity {
                         case "-":
                             result = initialN0 - SecondNumber;
                             break;
-                        case "*":
+                        case "x":
+                            Log.e("x", initialN0+""+SecondNumber );
                             result = initialN0 * SecondNumber;
                             break;
                         case "/":
@@ -154,11 +152,13 @@ public class MainActivity extends AppCompatActivity {
                                 output.setText("Invalid! Division by zero.");
                                 return;
                             } else {
+                                Log.e("/", initialN0+""+SecondNumber );
                                 result = initialN0 / SecondNumber;
                             }
                             break;
                     }
-                    output.setText("Answer = " + result);
+                    output.setText("Answer = " + String.format("%.2f", result));
+
                     actualInput = String.valueOf(result);
                     val.setText(actualInput);
                     operator = "";
